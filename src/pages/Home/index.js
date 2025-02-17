@@ -14,7 +14,7 @@ import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
   const { data } = useData()
-  const sortedEvents = data?.events.sort((a, b) => new Date(b.date) - new Date(a.date))
+  const sortedEvents = data?.events.toSorted((a, b) => new Date(b.date) - new Date(a.date))
   const lastEvent = sortedEvents?.[0]
   return <>
     <header>
