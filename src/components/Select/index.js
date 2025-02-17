@@ -12,12 +12,13 @@ const Select = ({
   titleEmpty,
   label,
   type = "normal",
+  value
 }) => {
-  const [value, setValue] = useState();
+  const [selectValue, setSelectValue] = useState(value);
   const [collapsed, setCollapsed] = useState(true);
   const changeValue = (newValue) => {
-    onChange();
-    setValue(newValue);
+    onChange(newValue);
+    setSelectValue(newValue);
     setCollapsed(newValue);
   };
   return (
@@ -26,20 +27,20 @@ const Select = ({
       <div className="Select">
         <ul>
           <li className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}>
-            {value || (!titleEmpty && "Toutes")}
+            {selectValue || (!titleEmpty && "Toutes")}
           </li>
           {!collapsed && (
             <>
               {!titleEmpty && (
                 <li onClick={() => changeValue(null)}>
-                  <input defaultChecked={!value} name="selected" type="radio" />{" "}
+                  <input defaultChecked={!selectValue} name="selected" type="radio" />{" "}
                   Toutes
                 </li>
               )}
               {selection.map((s) => (
                 <li key={s} onClick={() => changeValue(s)}>
                   <input
-                    defaultChecked={value === s}
+                    defaultChecked={selectValue === s}
                     name="selected"
                     type="radio"
                   />{" "}
@@ -49,7 +50,7 @@ const Select = ({
             </>
           )}
         </ul>
-        <input type="hidden" value={value || ""} name={name} />
+        <input type="hidden" value={selectValue || ""} name={name} />
         <button
           type="button"
           data-testid="collapse-button-testid"
@@ -88,6 +89,7 @@ Select.propTypes = {
   titleEmpty: PropTypes.bool,
   label: PropTypes.string,
   type: PropTypes.string,
+  value: PropTypes.string
 }
 
 Select.defaultProps = {
@@ -96,6 +98,7 @@ Select.defaultProps = {
   label: "",
   type: "normal",
   name: "select",
+  value: ""
 }
 
 export default Select;
