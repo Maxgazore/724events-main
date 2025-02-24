@@ -38,7 +38,7 @@ const Form = ({ onSuccess, onError }) => {
       // We try to call mockContactApi
       try {
         if (!validateInput()) {
-          throw new Error();
+          throw new Error("Tous les champs sont obligatoires.");
         }
         await mockContactApi();
         setSending(false);
@@ -47,7 +47,8 @@ const Form = ({ onSuccess, onError }) => {
       } catch (err) {
         setSending(false);
         onError(err);
-
+        // eslint-disable-next-line no-alert
+        alert(err)
       }
     },
     [onSuccess, onError, inputValue,]
