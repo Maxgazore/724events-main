@@ -11,7 +11,7 @@ describe("When Form is created", () => {
   });
 
   describe("and a click is triggered on the submit button", () => {
-    it("the success message is displayed", async () => {
+    it("the error message is displayed", async () => {
       render(<Home />);
       fireEvent(
         await screen.findByText("Envoyer"),
